@@ -92,7 +92,7 @@ The API, SQLite, and optimizer should report `ready`. In the default setup, mode
 1. Choose **EN**, enter the exercise, and optionally set playback to **2×**.
 2. Enter an operational goal, such as **Prioritize connecting passengers**, then confirm the interpreted request.
 3. Select **Analyze & Solve Safely** to generate candidate schedules.
-4. Open **Agent work → Full record**. Inspect a handoff and scroll to the timetable for all eight arrivals.
+4. In the agent brief, choose **Full record**; open **Agent work** first if the brief is closed. Inspect a handoff and scroll to the timetable for all eight arrivals.
 5. Preview the candidates. For the recorded walkthrough, select **Adapt to Weather Changes**, then **Approve and execute** when available.
 6. Follow the first arrivals. At the **T+9 tug failure**, inspect the affected flights and revised timetable; use **Resume** after the briefing. If the revised candidate requests approval, review and approve it before continuing.
 7. Watch the stand handover, connecting passengers boarding **NH701**, pushback, and takeoff. The completed exercise offers results and replay.
@@ -139,6 +139,8 @@ npm --prefix frontend test
 npm --prefix frontend run build
 npm --prefix frontend audit
 ~~~
+
+**Release validation (2026-10-21):** Linux x86_64, Python 3.10.12, Node.js 22.23.3; **267 backend tests and 232 frontend tests passed**, production build and fresh-install browser checks passed, and npm audit reported zero known frontend dependency vulnerabilities.
 
 For frontend development, run the Python API on port 8080 and `npm --prefix frontend run dev` in another terminal. Vite proxies API and WebSocket requests to the backend.
 
