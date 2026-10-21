@@ -1,0 +1,101 @@
+/* Default scene-first view. Rich evidence stays available through an explicit toggle.
+   At desktop 1280x720+, the compact chrome reserves <=30% of the viewport. */
+.map-first .top-hud { height: 42px; padding: 0 12px; grid-template-columns: minmax(160px,1fr) auto auto; gap: 16px; }
+.map-first .wordmark > span:last-child { display: none; }
+.map-first .mission-status { padding: 3px 10px; gap: 12px; }
+.map-first .mission-status > span { min-width: 58px; }
+.map-first .mission-status small { font-size: 7px; }
+.map-first .mission-status b { margin-top: 0; font-size: 11px; }
+.map-first .top-actions { gap: 0; }
+.map-first .top-actions button { padding: 7px; font-size: 10px; white-space: nowrap; }
+.map-first .situation-strip { top: 46px; left: 12px; right: 274px; padding: 3px; gap: 3px; min-height: 28px; overflow: auto; white-space: nowrap; border-radius: 8px; }
+.map-first .situation-strip > span { padding: 2px 6px; }
+.map-first .situation-strip em { padding: 0 5px; }
+.map-first .agent-dock { top: 46px; right: 12px; }
+.map-first .agent-dock.collapsed { width: 250px; }
+.map-first .agent-dock.collapsed .dock-title { padding: 6px 10px; font-size: 10px; }
+.map-first .story-beat { top: 80px; left: 16px; right: 520px; height: 24px; font-size: 11px; overflow: hidden; white-space: nowrap; }
+.map-first .story-beat > b { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.map-first .story-beat .recourse-chip { display: none; }
+.map-first .playback-controls { top: 78px; left: auto; right: 12px; height: 28px; padding: 0 3px; }
+.map-first .playback-controls > span { display: none; }
+.map-first .playback-controls button { min-height: 24px; padding: 3px 6px; }
+.map-first .layer-switch { top: 78px; bottom: auto; right: 300px; height: 28px; padding: 0 3px; }
+.map-first .layer-switch button { padding: 3px 6px; }
+.map-first .layer-switch button span { display: none; }
+.map-first .command-deck { left: 12px; right: 12px; bottom: 8px; border-radius: 10px; }
+.map-first .disclaimer { display: none; }
+.map-first .sandbox-tray:not(.open) { top: 78px; left: auto; right: 420px; bottom: auto; width: 96px; height: 28px; }
+.map-first .sandbox-tray:not(.open) .tray-handle { padding: 5px 8px; height: 26px; font-size: 9px; letter-spacing: .04em; }
+.map-first .sandbox-tray.open { top: 112px; bottom: auto; left: 12px; max-height: calc(100vh - 220px); overflow-y: auto; }
+.map-first.details-compact .command-deck { height: 84px; min-height: 0; max-height: none; padding: 6px; gap: 7px; overflow: hidden; }
+.map-first.details-compact .command-deck.with-plans { grid-template-columns: minmax(0,1fr) 254px; }
+.map-first.details-compact .plans-row { min-width: 0; min-height: 0; gap: 6px; }
+.map-first.details-compact .plan-card { padding: 5px 7px; border-radius: 7px; overflow: hidden; }
+.map-first.details-compact .plan-card-head { grid-template-columns: 18px minmax(0,1fr) auto; gap: 5px; }
+.map-first.details-compact .plan-icon { width: 18px; height: 18px; border-radius: 4px; }
+.map-first.details-compact .plan-icon svg { width: 13px; height: 13px; }
+.map-first.details-compact .plan-card-head strong { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.map-first.details-compact .plan-card-head small,
+.map-first.details-compact .plan-card-head em,
+.map-first.details-compact .plan-shield,
+.map-first.details-compact .plan-evidence-basis,
+.map-first.details-compact .risk-line,
+.map-first.details-compact .plan-approval-gate small { display: none; }
+.map-first.details-compact .plan-approval-gate { display: flex; gap: 3px; margin: 1px 0; padding: 1px 0; border: 0; background: transparent; }
+.map-first.details-compact .plan-approval-gate strong { font-size: 9px; }
+.map-first.details-compact .plan-metrics { margin-top: 1px; gap: 4px; }
+.map-first.details-compact .plan-metrics small { font-size: 8px; }
+.map-first.details-compact .plan-metrics b { font-size: 12px; margin-top: 0; }
+.map-first.details-compact .plan-actions { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 4px; width: auto; min-width: 0; }
+.map-first.details-compact .plan-actions button { min-height: 0; padding: 5px; font-size: 10px; }
+.map-first.details-compact .active-sensing-cue { display: none; }
+.map-first.details-compact .execution-guide { display: block; padding: 5px 8px; min-height: 0; overflow: hidden; }
+.map-first .execution-guide.span-3 { grid-column: 1 / -1; }
+.map-first.details-compact .execution-guide > header,
+.map-first.details-compact .mission-chapters,
+.map-first.details-compact .execution-flow,
+.map-first.details-compact .system-event-flow,
+.map-first.details-compact .briefing-horizon,
+.map-first.details-compact .execution-action-diff,
+.map-first.details-compact .execution-guide footer > em { display: none; }
+.map-first.details-compact .director-focus { display: block; margin: 0; }
+.map-first.details-compact .director-focus > strong { display: block; font-size: 12px; line-height: 18px; }
+.map-first.details-compact .director-focus > p { font-size: 10px; line-height: 15px; overflow: hidden; text-overflow: ellipsis; }
+.map-first.details-compact .director-focus > div { gap: 4px; }
+.map-first.details-compact .director-focus > div span { padding: 1px 3px; font-size: 9px; }
+.map-first.details-compact .execution-guide footer { margin-top: 2px; font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.map-first.details-compact .outcome-audit-card { padding: 5px 8px; overflow: hidden; }
+.map-first.details-compact .outcome-audit-card > header { display: flex; gap: 5px; }
+.map-first.details-compact .outcome-audit-card > header > span,
+.map-first.details-compact .outcome-audit-card > header small,
+.map-first.details-compact .outcome-audit-card > header em,
+.map-first.details-compact .outcome-audit-card > footer,
+.map-first.details-compact .outcome-scope-equation { display: none; }
+.map-first.details-compact .outcome-audit-card > header strong { font-size: 11px; }
+.map-first.details-compact .outcome-audit-metrics { margin-top: 3px; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+.map-first.details-compact .outcome-audit-metrics > span:nth-child(n+4) { display: none; }
+.map-first.details-compact .outcome-audit-metrics small { font-size: 9px; }
+.map-first.details-compact .outcome-audit-metrics b { font-size: 13px; }
+.map-first.details-compact .outcome-audit-metrics > span > i { display: none; }
+.map-first.details-compact .action-diff-story,
+.map-first.details-compact .agent-relay { max-height: 70px; overflow: hidden; }
+.map-first.details-compact .command-input { padding: 3px 6px; }
+.map-first.details-compact .coordination-actions { margin-top: 4px; gap: 6px; }
+.map-first.details-compact .coordination-actions button { padding: 6px 10px; }
+.map-first.details-open .command-deck { max-height: calc(100vh - 145px); overflow-y: auto; }
+/* Keep goal editing inside the deck's scroll area instead of above its clipping edge. */
+.map-first.details-open .command-deck > .objective-copilot {
+  position: static;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  min-width: 0;
+}
+@media (max-width: 1099px) {
+  .map-first .top-hud { gap: 5px; }
+  .map-first .top-actions button { font-size: 9px; padding: 6px 4px; }
+  .map-first .situation-strip { right: 216px; }
+  .map-first .agent-dock.collapsed { width: 192px; }
+  .map-first .story-beat { right: 420px; }
+  .map-first.details-compact .command-deck.with-plans { grid-template-columns: minmax(0,1fr) 200px; }
+}

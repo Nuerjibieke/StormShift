@@ -1,0 +1,11 @@
+title = "StormShift credential scanning"
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Synthetic scenario field identifiers, not credentials"
+regexTarget = "secret"
+regexes = [
+  '''^gate\.(A2|A9)\.available_minute$''',
+  '''^eldt_q9[05]_radius$''',
+]

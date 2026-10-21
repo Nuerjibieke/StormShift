@@ -1,0 +1,38 @@
+.agent-communication .plain-handoff h3 { font-size:22px; margin:14px 0 20px; line-height:1.5; color:#203f4b; }
+.agent-communication .story-reader { padding:22px; }
+.agent-communication .plain-handoff p { font-size:15px; line-height:1.8; }
+.agent-communication .handoff-story-workspace { grid-template-columns:240px minmax(0,1fr); align-items:start; margin-top:24px; }
+.agent-communication .handoff-story-workspace>nav { position:sticky; top:0; }
+.agent-communication .handoff-story-workspace>nav button { align-items:start; gap:9px; padding:15px 12px; }
+.agent-communication .handoff-story-workspace>nav button>span:nth-child(2) { min-width:0; flex:1; }
+.agent-communication .handoff-story-workspace>nav button>svg { flex-shrink:0; margin-top:4px; }
+.agent-communication .handoff-nav-message { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:11px; line-height:1.6; margin:7px 0; color:#4c6875; font-weight:400; }
+.agent-communication .handoff-message-steps { list-style:none; padding:0; margin:0; display:grid; gap:14px; }
+.agent-communication .handoff-message-step { display:grid; grid-template-columns:27px minmax(0,1fr); gap:12px; position:relative; }
+.agent-communication .message-step-number { border:1px solid #c9dae1; background:#f2f7fa; width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#3e6574; margin-top:16px; }
+.agent-communication .handoff-message-step:not(:last-child)::after { content:""; position:absolute; width:1px; background:#ccdde4; top:49px; bottom:-17px; left:13px; }
+.agent-communication .handoff-message { border-radius:12px; padding:16px 18px; border:1px solid #d4e3ed; margin:0; min-width:0; }
+.agent-communication .handoff-message h4 { margin:0 0 10px; font-size:14px; color:#355b6b; line-height:1.6; }
+.agent-communication .handoff-message p { margin:8px 0 0; }
+.agent-communication .sent-message { background:#edf6ff; }
+.agent-communication .received-message { background:#f4f2fc; border-color:#ddd9ef; }
+.agent-communication .message-content { font-size:17px !important; color:#203f4d; }
+.agent-communication .handoff-calculation { border:1px solid #d5d5e9; border-radius:8px; padding:10px 12px; background:#fff; color:#4c3f79; font-weight:700; font-size:15px !important; }
+.agent-communication .handoff-flight-picker { display:flex; align-items:center; gap:10px; margin:0 0 16px; font-size:13px; }
+.agent-communication .handoff-flight-picker select { padding:8px 12px; background:white; border:1px solid #bed4db; border-radius:8px; color:#234b59; }
+@media(max-width:900px) {
+ .agent-communication .handoff-story-workspace { grid-template-columns:1fr; }
+ .agent-communication .handoff-story-workspace>nav { position:static; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .agent-communication .plain-handoff h3 { font-size:20px; }
+ .agent-communication .story-reader { padding:16px; }
+}
+@media(max-width:550px) {
+ .agent-communication .handoff-story-workspace>nav { grid-template-columns:1fr; }
+ .agent-communication .handoff-message-step { grid-template-columns:22px minmax(0,1fr); gap:8px; }
+ .agent-communication .message-step-number { width:22px; height:22px; }
+ .agent-communication .handoff-message-step:not(:last-child)::after { left:10px; }
+ .agent-communication .handoff-message { padding:13px; }
+ .agent-communication .message-content { font-size:15px !important; }
+}
+
+.agent-communication .handoff-next-record { display:inline-flex; gap:6px; align-items:center; background:white; color:#2f6576; font-size:12px; padding:8px 10px; border:1px solid #c6dce2; border-radius:8px; margin-top:10px; cursor:pointer; }

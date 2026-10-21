@@ -1,0 +1,28 @@
+.preview-selection-receipt {
+  margin: .55rem 0;
+  padding: .65rem .75rem;
+  border: 1px solid rgba(90, 162, 187, .32);
+  border-radius: .55rem;
+  background: rgba(11, 28, 39, .58);
+  color: #dce8ee;
+  font-size: .78rem;
+  line-height: 1.5;
+  min-width: 0;
+}
+.preview-selection-receipt header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .3rem .65rem;
+}
+.preview-selection-receipt h4,
+.preview-selection-receipt p { margin: .25rem 0; }
+.preview-selection-receipt header span,
+.preview-selection-receipt small { color: #a8c1cd; }
+.preview-selection-receipt p > small { display: block; }
+.preview-selection-receipt .receipt-nominal-summary { margin: .4rem 0; }
+.preview-selection-receipt .receipt-event-evidence { overflow-wrap: anywhere; }
+.preview-selection-receipt ul { margin: .1rem 0 .3rem; padding-left: 1.1rem; }
+.preview-selection-receipt summary { cursor: pointer; color: #a9cbd8; }
+.preview-selection-receipt .receipt-approval-boundary { color: #e8c993; margin-top: .4rem; }

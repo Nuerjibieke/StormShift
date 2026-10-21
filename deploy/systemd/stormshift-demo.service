@@ -1,0 +1,19 @@
+[Unit]
+Description=StormShift airport recovery demo
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+# This template assumes the repository was cloned to ~/StormShift.
+WorkingDirectory=%h/StormShift
+EnvironmentFile=-%h/StormShift/.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=STORMSHIFT_ENABLE_LLM=off
+Environment=STORMSHIFT_ENABLE_VOICE=off
+ExecStart=%h/StormShift/.venv/bin/python main_v2.py --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+
+[Install]
+WantedBy=default.target

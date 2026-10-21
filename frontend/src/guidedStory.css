@@ -1,0 +1,49 @@
+.lobby .mode-grid.single-story { grid-template-columns: 1fr; max-width: 660px; margin-inline: auto; }
+.lobby .story-entry-steps { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 18px auto; color: #9bb6b3; font-size: 12px; }
+.lobby .story-entry-steps span { display: flex; gap: 6px; align-items: center; }
+.lobby .story-entry-steps b { color: #64e4cd; font-size: 10px; }
+.lobby .story-advanced-toggle { display: block; margin: 16px auto; padding: 9px 14px; color: #9bb6b3; border: 1px solid #294845; border-radius: 8px; background: transparent; }
+.lobby .story-default-data { color: #9bb6b3; font-size: 12px; max-width: 440px; line-height: 1.6; }
+.lobby .data-modes[hidden] { display: none; }
+.map-first .story-beat .story-guide-trigger { display: inline-flex; align-items: center; flex-shrink: 0; gap: 5px; min-height: 24px; padding: 2px 7px; background: #153a36; color: #8ff4e2; border: 1px solid #3d786f; border-radius: 5px; font-size: 11px; }
+.story-guide-dialog { width: min(820px, calc(100vw - 32px)); max-height: calc(100vh - 40px); overflow: auto; padding: 24px; color: #dcecea; background: #0b2225; border: 1px solid #376761; border-radius: 18px; box-shadow: 0 24px 80px #0009; }
+.story-guide-dialog::backdrop { background: #020d12b8; }
+.story-guide-dialog header { display: flex; justify-content: space-between; align-items: start; gap: 16px; margin-bottom: 18px; }
+.story-guide-dialog header small { color: #6ddcc7; letter-spacing: .09em; font-size: 10px; }
+.story-guide-dialog h2 { font-size: 23px; margin: 6px 0; }
+.story-guide-dialog h3 { font-size: 20px; margin: 8px 0 18px; }
+.story-guide-dialog button { cursor: pointer; color: #d7eae7; border: 1px solid #315d57; border-radius: 8px; padding: 9px 12px; background: #173936; }
+.story-guide-dialog button:focus-visible { outline: 2px solid #83eeda; outline-offset: 3px; }
+.story-guide-dialog button:disabled { opacity: .42; cursor: not-allowed; }
+.story-guide-dialog nav { display: grid; grid-template-columns: repeat(6,1fr); gap: 6px; }
+.story-guide-dialog nav button { display: flex; flex-direction: column; gap: 5px; text-align: left; font-size: 12px; background: #102c2e; }
+.story-guide-dialog nav button[aria-pressed="true"] { border-color: #63d9c5; background: #21534b; }
+.story-guide-dialog nav small { color: #80c5b8; font-size: 10px; }
+.story-guide-dialog article { background: #102e30; border: 1px solid #2a4c48; border-radius: 12px; padding: 20px; }
+.story-guide-dialog dl { display: grid; grid-template-columns: 95px 1fr; gap: 15px 18px; line-height: 1.7; font-size: 14px; margin: 0; }
+.story-guide-dialog dt { color: #75d8c5; font-weight: 600; }
+.story-guide-dialog dd { margin: 0; }
+.story-guide-note { padding: 10px 12px; border-left: 3px solid #dab66c; background: #302f24; color: #ead3a5; line-height: 1.6; font-size: 13px; }
+.story-guide-focus { font-size: 13px; color: #9dbfba; }
+.story-guide-focus b { color: #dceeea; }
+.story-guide-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.story-guide-actions button:first-child { color: #082621; background: #66e0c8; }
+.story-guide-caption { color: #97b5b0; line-height: 1.6; font-size: 12px; margin: 12px 0; }
+.story-guide-dialog footer { display: flex; justify-content: flex-end; }
+@media (max-width: 650px) {
+  .story-guide-dialog { padding: 14px; }
+  .story-guide-dialog nav { grid-template-columns: repeat(3,1fr); }
+  .story-guide-dialog dl { grid-template-columns: 1fr; gap: 6px; }
+  .story-guide-dialog dd { margin-bottom: 10px; }
+}
+
+.story-guide-plan { border-top: 1px solid #31544f; margin-top: 18px; padding-top: 14px; }
+.story-guide-plan > label { display: flex; align-items: center; gap: 14px; font-size: 13px; margin-bottom: 12px; }
+.story-guide-plan select { color: #d8efea; background: #143f3a; border: 1px solid #4b8c7e; border-radius: 6px; padding: 7px 10px; max-width: 70%; }
+.story-guide-plan > small, .story-guide-metrics small { font-size: 11px; color: #94b9b1; }
+.story-guide-metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 8px 0 15px; }
+.story-guide-metrics span { display: flex; flex-direction: column; gap: 5px; }
+.story-guide-metrics b { font-size: 19px; }
+.story-guide-plan details { color: #b8d0ca; line-height: 1.7; font-size: 12px; }
+.story-guide-plan summary { cursor: pointer; color: #8ce7d3; }
+.story-guide-plan details section { border-left: 2px solid #cda45f; padding-left: 12px; margin: 12px 0; }

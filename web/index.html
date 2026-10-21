@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111b">
+  <title>StormShift · Airport Recovery Room</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <strong>StormShift</strong>
+          <small>AIRPORT RECOVERY ROOM</small>
+        </div>
+      </div>
+      <div class="status-strip" aria-label="机场状态">
+        <div class="status-item">
+          <span>时间</span>
+          <strong id="clockValue">18:27</strong>
+        </div>
+        <div class="status-item">
+          <span>天气</span>
+          <strong id="weatherValue" class="status-good">正常</strong>
+        </div>
+        <div class="status-item">
+          <span>可用跑道</span>
+          <strong id="runwayValue">2 / 2</strong>
+        </div>
+        <div class="status-item">
+          <span>冲突</span>
+          <strong id="conflictValue">0</strong>
+        </div>
+      </div>
+      <button class="primary-action danger-action" id="stormButton">
+        <span class="button-dot"></span>触发暴雨
+      </button>
+    </header>
+
+    <main class="workspace">
+      <section class="world-card" id="worldCard">
+        <div id="airportCanvas" role="application" aria-label="交互式机场运行地图"></div>
+
+        <div class="event-banner hidden" id="eventBanner">
+          <span class="event-icon">!</span>
+          <div><strong>07R 跑道关闭</strong><small>雷击检查 · 预计 20 分钟</small></div>
+        </div>
+
+        <div class="map-title">
+          <span class="live-dot"></span>
+          <div><strong>NORTH HARBOR INTERNATIONAL</strong><small>实时运行图</small></div>
+        </div>
+
+        <div class="selection-card hidden" id="selectionCard">
+          <button id="closeSelection" aria-label="关闭">×</button>
+          <span id="selectionKind">航班</span>
+          <strong id="selectionTitle">SK218</strong>
+          <p id="selectionDetail"></p>
+        </div>
+
+        <div class="map-legend">
+          <span><i class="legend-dot normal"></i>正常</span>
+          <span><i class="legend-dot proposed"></i>建议</span>
+          <span><i class="legend-dot conflict"></i>冲突</span>
+        </div>
+
+        <div class="camera-hint">拖动地图 · 滚轮缩放 · 点击对象</div>
+      </section>
+
+      <aside class="decision-panel" id="decisionPanel" aria-live="polite"></aside>
+    </main>
+
+    <footer class="mission-dock">
+      <div class="play-controls">
+        <button class="icon-button" id="playButton" aria-label="暂停"><span id="playIcon">Ⅱ</span></button>
+        <button class="speed-button active" data-speed="1">1×</button>
+        <button class="speed-button" data-speed="2">2×</button>
+        <button class="speed-button" data-speed="4">4×</button>
+      </div>
+      <div class="timeline" id="timeline">
+        <div class="timeline-line"><div class="timeline-progress" id="timelineProgress"></div></div>
+        <div class="timeline-step active" data-phase="normal"><i></i><span>正常运行</span></div>
+        <div class="timeline-step" data-phase="disruption"><i></i><span>暴雨冲击</span></div>
+        <div class="timeline-step" data-phase="negotiating"><i></i><span>Agent 协商</span></div>
+        <div class="timeline-step" data-phase="executing"><i></i><span>执行恢复</span></div>
+        <div class="timeline-step" data-phase="recovered"><i></i><span>恢复完成</span></div>
+      </div>
+      <div class="mission-time"><span>演示进度</span><strong id="missionTime">00:00</strong></div>
+    </footer>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/vendor/phaser.min.js"></script>
+  <script src="/phaser-world.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

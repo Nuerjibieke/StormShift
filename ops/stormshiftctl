@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+ENV_FILE="${STORMSHIFT_ENV_FILE:-$ROOT/.env}"
+if [[ -f "$ENV_FILE" ]]; then
+  set -a
+  source "$ENV_FILE"
+  set +a
+fi
+
+STORMSHIFT_HOST="${STORMSHIFT_HOST:-127.0.0.1}"
+STORMSHIFT_PORT="${STORMSHIFT_PORT:-8080}"
+STORMSHIFT_CACHE_DIR="${STORMSHIFT_CACHE_DIR:-$ROOT/.cache}"
+STORMSHIFT_FAST_MODEL="${STORMSHIFT_FAST_MODEL:-Qwen/Qwen3-8B}"
+STORMSHIFT_DEEP_MODEL="${STORMSHIFT_DEEP_MODEL:-Qwen/Qwen3-30B-A3B}"
+STORMSHIFT_FAST_GPU="${STORMSHIFT_FAST_GPU:-}"
+STORMSHIFT_DEEP_GPU="${STORMSHIFT_DEEP_GPU:-}"
+STORMSHIFT_FAST_PORT="${STORMSHIFT_FAST_PORT:-8101}"
+STORMSHIFT_DEEP_PORT="${STORMSHIFT_DEEP_PORT:-8102}"
+STORMSHIFT_START_DEEP="${STORMSHIFT_START_DEEP:-0}"
+
+API_SESSION="stormshift-demo"
+FAST_SESSION="stormshift-fast-model"
+DEEP_SESSION="stormshift-deep-model"
+LOG_DIR="$ROOT/.runtime/logs"
+HF_HOME="$STORMSHIFT_CACHE_DIR/huggingface"
+mkdir -p "$LOG_DIR" "$HF_HOME" "$STORMSHIFT_CACHE_DIR/vllm" "$STORMSHIFT_CACHE_DIR/torchinductor"
+
+running() {
+  tmux has-session -t "$1" 2>/dev/null
+}
+
+start_api() {
+  if running "$API_SESSION"; then
+    echo "api: already running"
+    return
+  fi
+  local command
+  command="cd '$ROOT' && exec '$ROOT/.venv/bin/python' main_v2.py --host '$STORMSHIFT_HOST' --port '$STORMSHIFT_PORT' >>'$LOG_DIR/api.log' 2>&1"
+  tmux new-session -d -s "$API_SESSION" "$command"
+  echo "api: started on $STORMSHIFT_HOST:$STORMSHIFT_PORT"
+}
+
+start_model() {
+  local tier="$1"
+  local session model gpu port utilization
+  if [[ "$tier" == "fast" ]]; then
+    session="$FAST_SESSION"
+    model="$STORMSHIFT_FAST_MODEL"
+    gpu="$STORMSHIFT_FAST_GPU"
+    port="$STORMSHIFT_FAST_PORT"
+    utilization=".72"
+  else
+    session="$DEEP_SESSION"
+    model="$STORMSHIFT_DEEP_MODEL"
+    gpu="$STORMSHIFT_DEEP_GPU"
+    port="$STORMSHIFT_DEEP_PORT"
+    utilization=".82"
+  fi
+  if running "$session"; then
+    echo "$tier model: already running"
+    return
+  fi
+  if [[ -z "$gpu" ]]; then
+    echo "$tier model: set STORMSHIFT_${tier^^}_GPU in $ENV_FILE" >&2
+    return 2
+  fi
+  local command
+  command="cd '$ROOT' && export PATH='$ROOT/.venv-llm/bin':\$PATH CUDA_VISIBLE_DEVICES='$gpu' HF_HOME='$HF_HOME' TRANSFORMERS_CACHE='$HF_HOME' VLLM_CACHE_ROOT='$STORMSHIFT_CACHE_DIR/vllm' TORCHINDUCTOR_CACHE_DIR='$STORMSHIFT_CACHE_DIR/torchinductor' VLLM_USE_FLASHINFER_SAMPLER=0 && exec '$ROOT/.venv-llm/bin/vllm' serve '$model' --served-model-name '$model' --host 127.0.0.1 --port '$port' --dtype bfloat16 --gpu-memory-utilization '$utilization' --max-model-len 8192 --max-num-seqs 16 --enable-prefix-caching --download-dir '$HF_HOME/hub' >>'$LOG_DIR/$tier-model.log' 2>&1"
+  tmux new-session -d -s "$session" "$command"
+  echo "$tier model: starting on GPU $gpu, port $port"
+}
+
+stop_session() {
+  local session="$1"
+  local label="$2"
+  if running "$session"; then
+    tmux kill-session -t "$session"
+    echo "$label: stopped"
+  else
+    echo "$label: not running"
+  fi
+}
+
+endpoint_status() {
+  local label="$1"
+  local url="$2"
+  if curl -fsS --max-time 2 "$url" >/dev/null 2>&1; then
+    echo "$label: ready"
+  else
+    echo "$label: unavailable"
+  fi
+}
+
+status() {
+  endpoint_status "api" "http://127.0.0.1:$STORMSHIFT_PORT/api/v2/health"
+  endpoint_status "fast model" "http://127.0.0.1:$STORMSHIFT_FAST_PORT/v1/models"
+  endpoint_status "deep model" "http://127.0.0.1:$STORMSHIFT_DEEP_PORT/v1/models"
+  echo "sessions:"
+  tmux list-sessions -F "  #{session_name}: #{session_windows} window(s)" 2>/dev/null | sed -n '/stormshift/p' || true
+}
+
+action="${1:-status}"
+target="${2:-all}"
+case "$action" in
+  start)
+    case "$target" in
+      api) start_api ;;
+      fast) start_model fast ;;
+      deep) start_model deep ;;
+      all)
+        start_api
+        start_model fast
+        if [[ "$STORMSHIFT_START_DEEP" == "1" ]]; then start_model deep; fi
+        ;;
+      *) echo "unknown target: $target" >&2; exit 2 ;;
+    esac
+    ;;
+  stop)
+    case "$target" in
+      api) stop_session "$API_SESSION" "api" ;;
+      fast) stop_session "$FAST_SESSION" "fast model" ;;
+      deep) stop_session "$DEEP_SESSION" "deep model" ;;
+      all)
+        stop_session "$DEEP_SESSION" "deep model"
+        stop_session "$FAST_SESSION" "fast model"
+        stop_session "$API_SESSION" "api"
+        ;;
+      *) echo "unknown target: $target" >&2; exit 2 ;;
+    esac
+    ;;
+  restart)
+    "$0" stop "$target"
+    "$0" start "$target"
+    ;;
+  status) status ;;
+  logs)
+    case "$target" in
+      api) tail -n 80 "$LOG_DIR/api.log" ;;
+      fast) tail -n 80 "$LOG_DIR/fast-model.log" ;;
+      deep) tail -n 80 "$LOG_DIR/deep-model.log" ;;
+      *) echo "choose api, fast, or deep" >&2; exit 2 ;;
+    esac
+    ;;
+  *) echo "usage: $0 {start|stop|restart|status|logs} [api|fast|deep|all]" >&2; exit 2 ;;
+esac

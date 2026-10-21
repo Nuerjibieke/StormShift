@@ -1,0 +1,237 @@
+.lab-grid > article.falsification-section {
+  grid-column: 1 / -1;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(172, 139, 255, .3);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(172, 139, 255, .13), transparent 28%),
+    linear-gradient(135deg, rgba(17, 27, 42, .98), rgba(6, 24, 29, .98));
+}
+.falsification-section.thin { border-color: rgba(255, 111, 130, .45); }
+.falsification-section.watch { border-color: rgba(245, 190, 94, .42); }
+.falsification-section > header {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 11px;
+  padding: 15px 17px 12px;
+}
+.falsification-section > header > span {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: #cab9ff;
+  border: 1px solid rgba(190, 166, 255, .28);
+  border-radius: 11px;
+  background: rgba(122, 86, 221, .13);
+}
+.falsification-section > header small {
+  display: block;
+  margin-bottom: 3px;
+  color: #a997dd;
+  font-size: 6.5px;
+  font-weight: 800;
+  letter-spacing: .14em;
+}
+.falsification-section > header strong {
+  display: block;
+  color: #f0edfb;
+  font-size: 13px;
+}
+.falsification-section > header p {
+  margin: 4px 0 0;
+  color: #9c9eb0;
+  font-size: 8px;
+  line-height: 1.45;
+}
+.falsification-section > header em {
+  padding: 5px 8px;
+  color: #cfbeff;
+  border: 1px solid rgba(190, 166, 255, .28);
+  border-radius: 99px;
+  background: rgba(122, 86, 221, .11);
+  font-size: 7px;
+  font-style: normal;
+  font-weight: 800;
+}
+.falsification-section.thin > header em {
+  color: #ff9baa;
+  border-color: rgba(255, 111, 130, .32);
+  background: rgba(255, 76, 101, .09);
+}
+.falsification-section.watch > header em {
+  color: #f4c770;
+  border-color: rgba(245, 190, 94, .3);
+  background: rgba(245, 190, 94, .08);
+}
+.falsification-metrics {
+  display: grid;
+  grid-template-columns: 110px 110px 130px 1fr;
+  align-items: stretch;
+  border-block: 1px solid rgba(175, 152, 235, .12);
+  background: rgba(3, 16, 23, .4);
+}
+.falsification-metrics > span {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 14px;
+  border-right: 1px solid rgba(175, 152, 235, .12);
+}
+.falsification-metrics small {
+  color: #7e8192;
+  font-size: 6.5px;
+  letter-spacing: .08em;
+}
+.falsification-metrics b {
+  color: #d8cff3;
+  font-size: 14px;
+}
+.falsification-metrics p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  margin: 0;
+  padding: 8px 17px;
+  color: #778e8e;
+  font-size: 7px;
+}
+.falsification-metrics p svg { color: #67d6bd; }
+.falsification-axes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 12px 17px;
+}
+.falsification-axes > section {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(158, 143, 203, .16);
+  border-radius: 10px;
+  background: rgba(7, 22, 29, .7);
+}
+.falsification-axes > section.nearest {
+  border-color: rgba(218, 180, 103, .5);
+  background: linear-gradient(145deg, rgba(76, 55, 24, .22), rgba(8, 22, 28, .78));
+  box-shadow: inset 0 0 0 1px rgba(235, 191, 105, .05);
+}
+.falsification-axes section > header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px;
+  align-items: start;
+}
+.falsification-axes section > header span {
+  min-width: 0;
+}
+.falsification-axes section > header small,
+.falsification-axes section > header strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.falsification-axes section > header small {
+  color: #89879a;
+  font-size: 6px;
+}
+.falsification-axes section > header strong {
+  margin-top: 2px;
+  color: #dedbe9;
+  font-size: 8px;
+}
+.falsification-axes section > header b {
+  color: #f0c676;
+  font-size: 12px;
+}
+.falsification-axes section > header em {
+  grid-column: 1 / -1;
+  color: #e7b861;
+  font-size: 6px;
+  font-style: normal;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.falsification-axes section > p {
+  min-height: 29px;
+  margin: 8px 0;
+  color: #85928f;
+  font-size: 7px;
+  line-height: 1.42;
+}
+.minimality-chain {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.minimality-chain span {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 5px;
+  border-radius: 5px;
+  font-size: 5.5px;
+  font-weight: 800;
+}
+.minimality-chain span.pass {
+  color: #69d9c0;
+  background: rgba(73, 182, 157, .09);
+}
+.minimality-chain span.fail {
+  color: #ff8799;
+  background: rgba(232, 72, 98, .11);
+}
+.minimality-chain i {
+  color: #4f5c62;
+  font-size: 7px;
+  font-style: normal;
+}
+.falsification-repair {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 6px;
+  margin-top: 8px;
+  padding: 7px;
+  border: 1px solid rgba(101, 223, 197, .18);
+  border-radius: 7px;
+  color: #65ddc4;
+  background: rgba(43, 143, 122, .07);
+}
+.falsification-repair.manual_required {
+  color: #ff899b;
+  border-color: rgba(240, 91, 113, .2);
+  background: rgba(160, 43, 60, .08);
+}
+.falsification-repair small,
+.falsification-repair strong,
+.falsification-repair code {
+  display: block;
+}
+.falsification-repair small { font-size: 5.5px; letter-spacing: .08em; }
+.falsification-repair strong { margin-top: 2px; color: #d8ece7; font-size: 7px; }
+.falsification-repair code { margin-top: 2px; overflow: hidden; color: #6f9b94; font-size: 5.5px; text-overflow: ellipsis; white-space: nowrap; }
+.falsification-section > footer {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 17px;
+  border-top: 1px solid rgba(175, 152, 235, .1);
+}
+.falsification-section > footer code { color: #a38fd9; font-size: 6px; }
+.falsification-section > footer p { margin: 0; color: #606f73; font-size: 6px; }
+
+@media (max-width: 1000px) {
+  .falsification-axes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .falsification-metrics { grid-template-columns: repeat(3, 1fr); }
+  .falsification-metrics p { grid-column: 1 / -1; justify-content: flex-start; }
+}
+@media (max-width: 620px) {
+  .falsification-section > header { grid-template-columns: 38px minmax(0, 1fr); }
+  .falsification-section > header em { grid-column: 2; justify-self: start; }
+  .falsification-axes { grid-template-columns: 1fr; }
+}

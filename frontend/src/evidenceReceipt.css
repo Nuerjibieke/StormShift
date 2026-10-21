@@ -1,0 +1,9 @@
+.story-evidence-receipt { margin: 16px 0; padding: 14px; border: 1px solid #40766c; border-radius: 10px; background: #102a2d; font-size: 13px; line-height: 1.6; }
+.story-evidence-receipt h4 { margin: 0 0 10px; color: #81e6d2; }
+.story-evidence-receipt p { margin: 8px 0; }
+.story-evidence-receipt small { display: block; color: #b0c5bf; font-size: 11px; }
+.story-evidence-receipt table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 12px; }
+.story-evidence-receipt th, .story-evidence-receipt td { text-align: left; padding: 7px 6px; border-bottom: 1px solid #31534e; }
+.story-evidence-receipt details { font-size: 12px; color: #bad6d0; }
+.story-evidence-receipt summary { cursor: pointer; color: #8ce7d3; }
+.story-evidence-receipt .receipt-warning { color: #efd09a; }
